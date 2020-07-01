@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--CSS -->
+    <link rel="stylesheet"th:href="@{/static/css/bootstrap.min.css}">
+    <link rel="stylesheet"th:href="@{/static/css/animate.css}">
+    <link rel="stylesheet"th:href="@{/static/css/style.css}">
+</head>
+<body class="gray-bg">
+<div class="loginColumns animated fadeInDown">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="ibox-content">
+                <div class="h3 m-b-lg text-center">
+                    欢迎使用
+                    <span class="text-center" style="color: orange">测试课堂</span>
+                </div>
+                <form id="submit_form"  action="/toLogin"  method="post">
+                    <div class="input-group m-b">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" name="username" placeholder="用户名" autocomplete="off"/>
+                    </div>
+                    <div class="input-group m-b">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" class="form-control" name="password" placeholder="登录密码" autocomplete="off"/>
+                    </div>
+                    <input type="submit">
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>

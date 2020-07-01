@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试课堂平台</title>
+</head>
+
+<body >
+<div id="wrapper">
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">Welcome to 测试课堂</span>
+                    </li>
+                    <!--登录注销-->
+                    <div class="right menu">
+
+                        <!--如果未登录-->
+                        <div sec:authorize="!isAuthenticated()">
+                            <a class="item" th:href="@{/toLogin}">
+                                <i class="address card icon"></i> 登录
+                            </a>
+                        </div>
+
+                        <!--如果已登录-->
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="item">
+                                <i class="address card icon"></i>
+                                用户名：<span sec:authentication="principal.username"></span>
+                            </a>
+                        </div>
+
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="item" th:href="@{/logout}">
+                                <i class="address card icon"></i> 注销
+                            </a>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+
+        <!--控制显示不同的菜单-->
+        <div class="column" sec:authorize="hasRole('admin')">
+            <div class="ui raised segment">
+                <div class="ui">
+                    <div class="content">
+                        <h5 class="content">用户管理</h5>
+                        <hr>
+                        <div><a th:href="@{/user/list}"><i class="bullhorn icon"></i> 用户列表</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" sec:authorize="hasRole('teacher')">
+            <div class="ui raised segment">
+                <div class="ui">
+                    <div class="content">
+                        <h5 class="content">课程管理</h5>
+                        <hr>
+                        <div><a th:href="@{/course/list}"><i class="bullhorn icon"></i> 课程列表</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" sec:authorize="hasRole('student')">
+            <div class="ui raised segment">
+                <div class="ui">
+                    <div class="content">
+                        <h5 class="content">课程订阅管理</h5>
+                        <hr>
+                        <div><a th:href="@{/take/list}"><i class="bullhorn icon"></i>订阅列表</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--根据不同的角色展示不同的菜单,我这里不用后端控制了,偷懒-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <!--<ul class="nav metismenu" id="side-menu" th:switch="${user.role}">
+                    <li th:case="admin">
+                        <a href="/user/list"><i class="fa  fa-institution"></i>
+                            <span class="nav-label">用户管理</span> <span class="fa arrow"></span></a>
+                    </li>
+                    <li th:case="teacher">
+                        <a href="#"><i class="fa  fa-cubes"></i>
+                            <span  class="nav-label">课程管理</span> <span
+                                class="fa arrow"></span></a>
+                    </li>
+                    <li th:case="student">
+                        <a href="#"><i class="fa  fa-at"></i>
+                            <span class="nav-label">订阅管理</span> <span
+                                class="fa arrow"></span></a>
+                    </li>
+                </ul>-->
+            </div>
+        </nav>
+
+        <div class="footer">
+            <div class="pull-right">&nbsp;</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
