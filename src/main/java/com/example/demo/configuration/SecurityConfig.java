@@ -31,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // 开启登录配置
         http.authorizeRequests()
-                .antMatchers("/console/**").permitAll()
                 .antMatchers("/check").permitAll()
                 // 标识访问修改教师和学生的页面必须是管理员
                 .antMatchers("/user").hasRole("admin")
@@ -58,4 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("student").password(new BCryptPasswordEncoder().encode("111111")).roles("student");
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/console/**");
+    }
 }

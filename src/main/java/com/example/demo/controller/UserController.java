@@ -26,8 +26,8 @@ public class UserController {
     public String userList(Model model){
         List<User> users = userService.findAll();
 
-        users.add(new User(1L, "admin", new BCryptPasswordEncoder().encode("123456"), null));
-        users.add(new User(2L, "user", new BCryptPasswordEncoder().encode("123456"), null));
+        //users.add(new User(1L, "admin", new BCryptPasswordEncoder().encode("123456"), null));
+        //users.add(new User(2L, "user", new BCryptPasswordEncoder().encode("123456"), null));
         //查询用户的列表
         model.addAttribute("users",users);
         return "user/list";
